@@ -1,0 +1,45 @@
+<form #regNoComponent="ngForm" class="form-group">
+    <label for="registrationNumber">Registration Number :</label>
+    <div class="input-group row">
+        <div class="row" style="padding-left: 30px;">
+            <select [disabled]="disabled" style="width: 76px !important;padding-right: 0px;" id="typeOfRegistration" class="custom-select" name="typeOfRegistrationValue"
+                [(ngModel)]="typeOfRegistration" #typeOfRegistrationValue="ngModel" (change)="onchangeRegType();">
+                    <option value="New">New</option>
+                    <option value="Old">Old</option>
+                </select>
+            <ng-container *ngIf="typeOfRegistration === 'New'">
+                <input [disabled]="disabled" style="padding:0px; TEXT-ALIGN: CENTER;" id="registrationNoPart1" type="text" class="form-control" pattern="[a-zA-Z]*"
+                    [(ngModel)]="regNoValue.registrationNoPart1" name="registrationNoPart1" #registrationNoPart1="ngModel" maxlength="2"
+                    minlength="2" [required]="requiredChild" (change)="ValidationReg();" (keyup)="FocusNextInput(registrationNoPart1.value,2,1)"
+                    uppercase>
+                <input [disabled]="disabled" style="padding:0px; TEXT-ALIGN: CENTER;" id="registrationNoPart2" type="text" class="form-control" pattern="[a-zA-Z0-9]*"
+                    [(ngModel)]="regNoValue.registrationNoPart2" name="registrationNoPart2" #registrationNoPart2="ngModel" maxlength="2"
+                    minlength="1" [required]="requiredChild" (change)="ValidationReg();" (keyup)="FocusNextInput(registrationNoPart2.value,2,2)"
+                    uppercase>
+                <input [disabled]="disabled" style="padding:0px; TEXT-ALIGN: CENTER;" id="registrationNoPart3" type="text" class="form-control" 
+                    [(ngModel)]="regNoValue.registrationNoPart3" name="registrationNoPart3" #registrationNoPart3="ngModel" maxlength="3"
+                    minlength="1" [required]="requiredChild" (change)="ValidationReg();" (keyup)="FocusNextInput(registrationNoPart3.value,3,3)"
+                    uppercase>
+                <input [disabled]="disabled" style="padding:0px; TEXT-ALIGN: CENTER;" id="registrationNoPart4" type="text" class="form-control" pattern="[0-9]*"
+                    [(ngModel)]="regNoValue.registrationNoPart4" name="registrationNoPart4" #registrationNoPart4="ngModel" maxlength="4"
+                    minlength="4" [required]="requiredChild" (change)="ValidationReg();" (keyup)="FocusNextInput(registrationNoPart4.value,4,4)"
+                    uppercase>
+            </ng-container>
+
+            <ng-container *ngIf="typeOfRegistration === 'Old'">
+                <input [disabled]="disabled" style="padding:0px; TEXT-ALIGN: CENTER;" id="registrationNoPart1" type="text" class="form-control" pattern="[a-zA-Z]*"
+                    [(ngModel)]="regNoValue.OldregistrationNoPart1" name="registrationNoPart1" #registrationNoPart1="ngModel" maxlength="3"
+                    minlength="3" [required]="requiredChild" (change)="ValidationReg()" (keyup)="FocusNextInput(registrationNoPart1.value,3,1)"
+                    uppercase>
+                <input [disabled]="disabled" style="padding:0px; TEXT-ALIGN: CENTER;" id="registrationNoPart2" type="text" class="form-control" pattern="[0-9]*"
+                    [(ngModel)]="regNoValue.OldregistrationNoPart2" name="registrationNoPart2" #registrationNoPart2="ngModel" maxlength="4"
+                    minlength="4" [required]="requiredChild" uppercase (change)="ValidationReg()" (keyup)="FocusNextInput(registrationNoPart2.value,4,2)">
+            </ng-container>
+        </div>
+    </div>
+    <div *ngIf="regNoComponent && regNoComponent.form && regNoComponent.form.invalid">
+        <div [hidden]="regNoComponent.form.errors && !regNoComponent.form.errors.required" class="alert alert-danger-custom" style="font-size:80%;font-weight:400;padding:0 0 0 0;">
+            Required Field
+        </div>
+    </div>
+</form>
