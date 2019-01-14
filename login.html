@@ -1,0 +1,77 @@
+<div id="loginPage" class="p-lg-6 p-md-4">
+  <!-- Main Content-->
+  <section class="">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-8 col-md-6 pt-md-5 d-md-block" style="display:none;">
+          <h2 class="text-light pt-md-5"><strong>Sign In</strong></h2>
+          <p class="mt-md-4">To access the <span class="text-light">Royal Sundaram</span> policy insurance website,please enter your username
+            and password. Then click ‘<span class="text-light">Sign In</span>’</p>
+          <p class="small">Copyright 2016-2017.<br>Royal Sundaram General Insurance Co. Ltd All rights reserved.</p>
+          <p class="small">Insurance is the subject matter of solicitation IRDA Registration No.102. Granted on October 2000.</p>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="loginBlock">
+            <div class="row">
+              <img [src]="RSALOGO" class="img-fluid mx-auto my-4">
+            </div>
+            <form autocomplete="off" novalidate [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+              <div class="row">
+                <div class="col-12">
+                  <label class="sr-only" for="uName">Username</label>
+                  <div class="input-group loginErrorMsg p-2">
+                    <div class="input-group-addon"><b class="fa fa-user text-rs"></b></div>
+                    <input type="text" class="form-control is-valid" id="uName" formControlName="uName" placeholder="Username" required>
+                  </div>
+                  <!-- <div class="invalid-feedback">Invalid Username</div> -->
+                  <!-- <div *ngIf="!loginForm.controls.uName.valid" class="invalid-feedback">Name is required</div> -->
+                </div>
+                <div class="col-12 pb-4">
+                  <label class="sr-only" for="pWord">Password</label>
+                  <div class="input-group loginErrorMsg p-2">
+                    <!-- <em *ngIf="loginForm.controls.pWord?.invalid && (loginForm.controls.pWord?.touched || mouseoverLogin)">Required</em> -->
+                    <div class="input-group-addon"><b class="fa fa-lock text-rs"></b></div>
+                    <input type="password" class="form-control is-valid" id="pWord" formControlName="pWord" placeholder="Password" required>
+                  </div>
+                  <!-- <div class="invalid-feedback">Invalid Password</div> -->
+                  <!-- <div *ngIf="!loginForm.controls.pWord.valid" class="invalid-feedback">Password is required</div> -->
+                </div>
+              </div>
+              <br>
+              <div *ngIf="globals.loginInvalid" class="text-danger">{{globals.loginInvalidMsg}}</div>
+              <div class="mb-4 row">
+                <div class="col-12">
+                  <div class="input-group p-2">
+                    <!-- <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false"><button type="submit" class="btn btn-block btn-success" [disabled]="loginForm.invalid">Sign In</button></span> -->
+                    <button type="submit" class="btn btn-block btn-success">Sign In</button>
+                  </div>
+                  <div class="input-group p-2">
+                    <button type="button" class="btn-block btn-link text-rs">Forgot Password</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <p class="small text-center text-muted">By accessing Royal Sundaram online insurance facility,
+                  <br>I hereby acknowledge and accept the <a href="#" class="text-rs">Terms & Conditions</a> applicable.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="loadingTextScreen" style="display:none;">
+  <div id="loadingIcon">
+    <div class="row" style="text-align:center">
+      <div class="col-12">
+        <i id="loadingIconFlip" class="fa fa-lock fa-3x fa-fw"></i>
+      </div>
+      <div class="col-12">
+        <span class="loadingTextMain">{{loadingText}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>
