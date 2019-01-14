@@ -1,0 +1,2085 @@
+<app-homehealth-nav></app-homehealth-nav>
+<div class="tabheadingContaienr clearfix">
+	<div class="container bgSk">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="resp-tabs-list hor_1">
+					<li id="calculateTab" class="calculateTab resp-tab-item hor_1 resp-tab-active" title="INSURED DETAILS" aria-controls="hor_1_tab_item-0"
+					 role="tab" style="border-color: rgb(0, 73, 144);">
+						<span class="tabheadtext">
+							<span>1</span>INSURED DETAILS</span>
+					</li>
+					<li id="proposalTab" class="proposalTab resp-tab-item hor_1" title="HOME DETAILS" aria-controls="hor_1_tab_item-1" role="tab">
+						<span class="tabheadtext">
+							<span>2</span>HOME DETAILS</span>
+					</li>
+					<li id="paymentTab" class="paymentTab resp-tab-item hor_1" title="PREMIUM DETAILS" aria-controls="hor_1_tab_item-2" role="tab">
+						<span class="tabheadtext">
+							<span>3</span>PREMIUM DETAILS</span>
+					</li>
+
+
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="resp-tabs-container hor_1" style="border-color: rgb(0, 73, 144);">
+	<h2 class="resp-accordion hor_1" role="tab" aria-controls="hor_1_tab_item-0" style="border-color: rgb(0, 73, 144);">
+		<span class="resp-arrow"></span>
+		<span class="tabheadtext">
+			<span>1</span>CALCULATE PREMIUM</span>
+	</h2>
+	<div class="resp-tab-content hor_1 resp-tab-content-active" aria-labelledby="hor_1_tab_item-1" style="display:block">
+		<div class="container bgSk">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="proposaltabs-holder mb-2">
+
+						<ul class="proposaltabs-list clearfix">
+							<li [ngClass]="{'active': currentVIew == 'ProposerDetails'}">
+								<p class="tablist-tablecell">
+									<span class="tablist-count">
+										<span>1</span>
+									</span>
+									<span class="tablist-heading pdlogo">Person Details</span>
+								</p>
+							</li>
+							<li [ngClass]="{'active': currentVIew == 'AddressDetails'}">
+								<p class="tablist-tablecell">
+									<span class="tablist-count">
+										<span>2</span>
+									</span>
+									<span class="tablist-heading idlogo">Address Details</span>
+								</p>
+							</li>
+							<li [ngClass]="{'active': currentVIew == 'AdditionalDetails'}">
+								<p class="tablist-tablecell">
+									<span class="tablist-count">
+										<span>3</span>
+									</span>
+									<span class="tablist-heading pdlogo">Additional Details</span>
+								</p>
+							</li>
+							<li [ngClass]="{'active': currentVIew == 'Nominee1Details'}">
+								<p class="tablist-tablecell">
+									<span class="tablist-count">
+										<span>4</span>
+									</span>
+									<span class="tablist-heading mqlogo">Nominee1 Details</span>
+								</p>
+							</li>
+							<li [ngClass]="{'active': currentVIew == 'Nominee2Details'}">
+								<p class="tablist-tablecell">
+									<span class="tablist-count">
+										<span>5</span>
+									</span>
+									<span class="tablist-heading mqlogo">Nominee2 Details</span>
+								</p>
+							</li>
+							<li *ngIf="setGuardianMandatory" [ngClass]="{'active': currentVIew == 'GuardianDetails'}">
+								<p class="tablist-tablecell">
+									<span class="tablist-count">
+										<span>6</span>
+									</span>
+									<span class="tablist-heading mqlogo">Guardian Details</span>
+								</p>
+							</li>
+
+						</ul>
+					</div>
+					<div class="row">
+						<!-- <div [class]="currentVIew == 'ProposerDetails' ? 'col-md-12' : 'col-md-9'"> -->
+						<div class="col-md-9">
+							<!-- proposalform-single -->
+							<div class="proposalform-container formmaincontainer" *ngIf="currentVIew == 'ProposerDetails'">
+								<form id="proposerdetailsform" #proposerdetailsform="ngForm" name="proposerdetailsform" novalidate="novalidate">
+									<ul class="proposalform-single accordian" id="proposalform-single">
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p class="layoutClassParent">First Name
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': proposerInfoFirstName.valid}" id="firstnameValid">{{policyDetailsModel.policyDetails.proposerDetails.firstName}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder first-child">
+												<div class="form-group">
+													<input type="text" class="form-control tabIndexCustom namechange" maxlength="40" #proposerInfoFirstName="ngModel" name="proposerInfoFirstName"
+													 id="firstName" pattern="[a-zA-Z. ]*$" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.firstName" required [class.is-invalid]="proposerInfoFirstName.errors?.required && proposerInfoFirstName.touched">
+													 
+													 <div class="invalid-feedback">Please Enter First Name</div>
+													</div>
+												<!-- <div *ngIf="proposerInfoFirstName.errors && proposerInfoFirstName.touched">
+													<div [hidden]="!proposerInfoFirstName.errors.required" class="input-error" >
+														Please Enter First Name
+													</div>
+												</div> -->
+												
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Middle Name</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata " [ngClass]="{'validdatasuccess': proposerInfoMiddleName.valid}" id="firstnameValid">{{policyDetailsModel.policyDetails.proposerDetails.middleName}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" class="form-control tabIndexCustom namechange" maxlength="40" #proposerInfoMiddleName="ngModel" name="proposerInfoMiddleName"
+													 id="middleName" pattern="[a-zA-Z. ]*$" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.middleName">
+												</div>
+												<div *ngIf="proposerInfoMiddleName.errors && proposerInfoMiddleName.touched">
+													<div [hidden]="!proposerInfoMiddleName.errors.required" class="input-error" >
+														Please Enter Middle Name
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Last Name
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': proposerInfoLastName.valid}">{{policyDetailsModel.policyDetails.proposerDetails.lastName}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" required [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.lastName" class="form-control tabIndexCustom"
+													 #proposerInfoLastName="ngModel" name="proposerInfoLastName" id="lastName" pattern="[a-zA-Z. ]*$" maxlength="40" [class.is-invalid]="proposerInfoLastName.errors?.required && proposerInfoLastName.touched">
+
+													<div class="invalid-feedback">Please Enter Last Name</div>
+												</div>
+												<!-- <div *ngIf="proposerInfoLastName.errors && proposerInfoLastName.touched">
+													<div [hidden]="!proposerInfoLastName.errors.required" class="input-error" >
+														Please Enter Last Name
+													</div>
+												</div> -->
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Date Of Birth
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': dateOfBirth.valid}">{{policyDetailsModel.policyDetails.proposerDetails.dateOfBirth}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group" style="max-width: 240px;">
+													<p-calendar id="dateOfBirth" #dateOfBirth="ngModel" name="dateOfBirth" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.dateOfBirth"
+													 [monthNavigator]="true" [yearNavigator]="true" yearRange="1910:2020" dateFormat="dd/mm/yy" showIcon="true" dataType="string"
+													 (onSelect)="validateDOB($event);" (change)="validateDOB(policyDetailsModel.policyDetails.proposerDetails.dateOfBirth);"
+													 required="true" inputStyleClass="tabIndexCustom"></p-calendar>
+
+													<div class="invalid-feedback"  [class.d-block]="dateOfBirth.errors?.required && dateOfBirth.touched">Please Enter Date of Birth</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Gender</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': gender.valid}">{{policyDetailsModel.policyDetails.proposerDetails.gender == 'm'? 'Male': policyDetailsModel.policyDetails.proposerDetails.gender}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<!-- <select id="gender" class="form-control" #gender="ngModel" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.gender" name="gender">
+														<option value="Male">Male</option>
+														<option value="Female">Female</option>
+													</select> -->
+													<div class="btn-group btn-group-toggle" id="gender">
+														<label class="btn btn-toggle" [class.active]="gender.value == 'Male'">
+															<input type="radio" class="tabIndexCustom" name="gender" #gender="ngModel" value="Male" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.gender"> Male
+														</label>
+														<label class="btn btn-toggle" [class.active]="gender.value == 'Female'">
+															<input type="radio" class="tabIndexCustom" name="gender" #gender="ngModel" value="Female" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.gender"> Female
+														</label>
+													</div>
+												</div>
+											</div>
+										</li>
+
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Marital Status</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': maritalStatus.valid}">{{policyDetailsModel.policyDetails.proposerDetails.maritalStatus}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<!-- <select id="maritalStatus" name="maritalStatus" class="form-control" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.maritalStatus"
+													 #maritalStatus="ngModel">
+														<option value="">Select</option>
+														<option value="Single">Single</option>
+														<option value="Married">Married</option>
+													</select> -->
+													<div class="btn-group btn-group-toggle" id="maritalStatus">
+														<label class="btn btn-toggle" [class.active]="maritalStatus.value == 'Single'">
+															<input type="radio" class="tabIndexCustom" name="maritalStatus" #maritalStatus="ngModel" value="Single" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.maritalStatus"> Single
+														</label>
+														<label class="btn btn-toggle" [class.active]="maritalStatus.value == 'Married'">
+															<input type="radio" class="tabIndexCustom" name="maritalStatus" #maritalStatus="ngModel" value="Married" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.maritalStatus"> Married
+														</label>
+													</div>
+												</div>
+											</div>
+										</li>
+
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Mobile <span class="alert-danger-custom">*</span></p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': mobile.valid}">{{policyDetailsModel.policyDetails.proposerDetails.mobile}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" id="mobile" #mobile="ngModel" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.mobile"
+													 name="mobile" maxlength="10" pattern="[0-9]{10}" required [class.is-invalid]="mobile.errors?.required && mobile.touched"/>
+
+													<div class="invalid-feedback">Please Enter Mobile Number</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Email
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': email.valid}">{{policyDetailsModel.policyDetails.proposerDetails.email}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="email" #email="ngModel" id="email" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.email"
+													 name="email" required value="true" maxlength="60" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" [class.is-invalid]="email.invalid && email.touched"/>
+
+													 <div class="invalid-feedback" *ngIf="email.errors?.pattern && email.touched">Please enter the Valid Email</div>
+													 <div class="invalid-feedback" *ngIf="email.errors?.required && email.touched">Please enter the Email</div>
+												</div>
+												<!-- <div *ngIf="email.errors && email.touched">
+													<div [hidden]="!email.errors.required" class="input-error" >
+														Please enter the Email
+													</div>
+												</div> -->
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Loan Amount
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': loanAmount.valid}">{{policyDetailsModel.policyDetails.proposerDetails.loanAmount}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder" style="display: none;">
+												<div class="form-group">
+													<input type="text" id="loanAmount" #loanAmount="ngModel" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.loanAmount"
+														name="loanAmount" class="form-control tabIndexCustom" required maxlength="8" customMax="20000000" pattern="[0-9]*" [class.is-invalid]="loanAmount.invalid && loanAmount.touched">
+
+													<div class="invalid-feedback" *ngIf="loanAmount.errors?.required && loanAmount.touched">Please Enter Loan Amount</div>
+													<div class="invalid-feedback" *ngIf="loanAmount.errors?.customMax && loanAmount.touched">Loan amount should not be greater than two Crores</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>NEO Loan Application No
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': loanApplicationNumber.valid}"><span *ngIf="policyDetailsModel.policyDetails.proposerDetails.loanApplicationNumber">APPL</span>{{policyDetailsModel.policyDetails.proposerDetails.loanApplicationNumber}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder" style="display: none;">
+												<div class="form-group">
+													<div class="input-group mb-3">
+														<div class="input-group-addon">
+															<span class="input-group-text" id="basic-addon1">APPL</span>
+														</div>
+														<input type="text" id="loanApplicationNumber" required #loanApplicationNumber="ngModel" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.loanApplicationNumber"
+															name="loanApplicationNumber" value="APPL" class="form-control tabIndexCustom" maxlength="8" pattern="[0-9]{8}" [class.is-invalid]="loanApplicationNumber.invalid && loanApplicationNumber.touched" style="max-width:180px;">
+													</div>
+													
+													<div class="invalid-feedback" *ngIf="loanApplicationNumber.errors?.required && loanApplicationNumber.touched">Please Enter Neo Loan Application Number</div>
+													<div class="invalid-feedback" *ngIf="loanApplicationNumber.errors?.pattern && loanApplicationNumber.touched">Please Enter a valid NEO Account Number</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Loan Account Number</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': loanAccountNumber.valid}">{{policyDetailsModel.policyDetails.proposerDetails.loanAccountNumber}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder" style="display: none;">
+												<div class="form-group">
+													<input type="text" id="loanAccountNumber" #loanAccountNumber="ngModel" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.loanAccountNumber"
+														name="loanAccountNumber" class="form-control tabIndexCustom" maxlength="16" pattern="^[a-zA-Z0-9\s]+$" [class.is-invalid]="loanAccountNumber.invalid && loanAccountNumber.touched">
+													
+													<div class="invalid-feedback" *ngIf="loanAccountNumber.errors?.pattern && loanAccountNumber.touched">Special Characters are not Allowed</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formbuttonholder">
+												<span>
+													<input type="button" (click)="fillHomeDetails(proposerdetailsform, proposerdetailsform.valid,'proposalform-single')" class="btn btn-primary"
+													 data-accnext="2" value="NEXT" title="NEXT" [disabled]="dedupeCheckProp">
+													<span class="subarrow"></span>
+												</span>
+											</div>
+										</li>
+
+									</ul>
+								</form>
+							</div>
+							<!-- proposalform-END -->
+
+							<!-- AddressDetails -->
+							<div class="contactform-container formmaincontainer" [hidden]="!(currentVIew == 'AddressDetails')">
+								<form id="contactdetailsform" #contactdetailsform="ngForm" name="contactdetailsform" novalidate="novalidate">
+									<ul class="contactform-single accordian" id="contactform-single">
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Address1
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': proposerInfoAddress1.valid}">{{policyDetailsModel.policyDetails.proposerDetails.address1}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder first-child">
+												<div class="form-group">
+													<input type="text" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.address1" class="form-control tabIndexCustom"
+													 #proposerInfoAddress1="ngModel" name="proposerInfoAddress1" id="address1" maxlength="40" required>
+												</div>
+												<div *ngIf="proposerInfoAddress1.errors && proposerInfoAddress1.touched">
+													<div [hidden]="!proposerInfoAddress1.errors.required" class="input-error" >
+														Please enter the House No. and Name
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Address2</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': proposerInfoAddress2.valid}">{{policyDetailsModel.policyDetails.proposerDetails.address2}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.address2" class="form-control tabIndexCustom"
+													 name="proposerInfoAddress2" #proposerInfoAddress2="ngModel" id="address2" maxlength="40"> </div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Address3</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': proposerInfoAddress3.valid}">{{policyDetailsModel.policyDetails.proposerDetails.address3}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.address3" class="form-control tabIndexCustom"
+													 name="proposerInfoAddress3" #proposerInfoAddress3="ngModel" id="address3" maxlength="40"> </div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Address4</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': proposerInfoAddress4.valid}">{{policyDetailsModel.policyDetails.proposerDetails.address4}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.address4" class="form-control tabIndexCustom"
+													 name="proposerInfoAddress4" #proposerInfoAddress4="ngModel" id="address4" maxlength="40"> </div>
+											</div>
+										</li>
+
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>City
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': city.valid}">{{policyDetailsModel.policyDetails.proposerDetails.city}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<p-autoComplete id="City" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.city" #city="ngModel" name="city" [suggestions]="filteredCities"
+													 (completeMethod)="filterCities($event.query)" required="true" (onSelect)="callBackToGetStates($event);"
+													 [forceSelection]="true" inputStyleClass="tabIndexCustom"></p-autoComplete>
+													<!-- <div *ngIf="city.errors && city.touched">
+														<div [hidden]="!city.errors.required" class="input-error" >
+															Please enter the City
+														</div>
+													</div> -->
+												</div>
+											</div>
+										</li>
+
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>State</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': state.valid}">{{policyDetailsModel.policyDetails.proposerDetails.state}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" id="state" #state="ngModel" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.state" name="state"
+													 class="form-control tabIndexCustom" readonly="readonly" />
+												</div>
+												<div *ngIf="state.errors && state.touched">
+													<div [hidden]="!state.errors.required" class="input-error" >
+														Please enter the State
+													</div>
+												</div>
+											</div>
+										</li>
+
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Pincode
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': pinCode.valid}">{{policyDetailsModel.policyDetails.proposerDetails.pinCode}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" id="pinCode" #pinCode="ngModel" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.pinCode"
+														name="pinCode" required pattern="^[1-9][0-9]{5}$" maxlength="6" />
+													<div *ngIf="pinCode.errors && pinCode.touched">
+														<div [hidden]="!pinCode.errors.required" class="input-error" >
+															Please enter the Pincode
+														</div>
+													</div>
+												</div>
+											</div>
+										</li>
+
+										<li>
+											<div class="formbuttonholder">
+												<a href="javascript:void(0)" class="btn btn-link" (click)="backToProposerDetails()" title="Back" data-formprev="proposalform-container"
+												 data-position="0">BACK</a>
+
+												<span>
+													<input type="button" (click)="fillAdditionalDetails(contactdetailsform,contactdetailsform.valid,'contactform-single')" class="btn btn-primary"
+													 data-accnext="2" value="NEXT" title="NEXT">
+													<span class="subarrow"></span>
+												</span>
+											</div>
+										</li>
+									</ul>
+								</form>
+							</div>
+							<!-- AddressDetails end -->
+
+							<!-- AdditionalDetails -->
+							<div class="proposalform-container formmaincontainer" [hidden]="!(currentVIew == 'AdditionalDetails')">
+								<form id="additionaldetailsform" #additionaldetailsform="ngForm" name="additionaldetailsform" novalidate="novalidate">
+									<ul class="additionalform-single accordian" id="additionalform-single">
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Annual Income</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': annualIncome.valid}">{{policyDetailsModel.policyDetails.proposerDetails.annualIncome}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<select id="annualIncome" name="annualIncome" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.annualIncome"
+														#annualIncome="ngModel">
+														<option value="Less than 5 lakhs">Less than 5 lakhs</option>
+														<option value="5 - 10 Lakhs">5 - 10 Lakhs</option>
+														<option value="10 - 20 Lakhs">10 - 20 Lakhs</option>
+														<option value="Greater than 20 Lakhs">Greater than 20 Lakhs</option>
+													</select>
+
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Aadhar Number</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': customerAadharNumber.valid}">{{policyDetailsModel.policyDetails.proposerDetails.customerAadharNumber}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder" style="display: none;">
+												<div class="form-group">
+													<input type="text" id="customerAadharNumber" #customerAadharNumber="ngModel" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.customerAadharNumber"
+														name="customerAadharNumber" class="form-control tabIndexCustom" maxlength="12" pattern="[0-9]*">
+												</div>
+											</div>
+										</li>
+
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Policy Term</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': policyTerm.valid}">{{policyDetailsModel.policyDetails.policyDuration}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<select id="policyTerm" #policyTerm="ngModel" [(ngModel)]="policyDetailsModel.policyDetails.policyDuration" name="policyTerm"
+														class="form-control tabIndexCustom">
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+													</select>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Occupation</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': occupation.valid}">{{policyDetailsModel.policyDetails.proposerDetails.occupation}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<select id="occupation" #occupation="ngModel" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.occupation" name="occupation"
+														class="form-control tabIndexCustom">
+														<option value="">Select</option>
+														<option *ngFor="let item of occupations" [value]="item">{{item}}</option>
+													</select>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>PAN <span class="alert-danger-custom">*</span></p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': proposerPanNumber.valid}">{{policyDetailsModel.policyDetails.proposerDetails.panNumber}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" id="proposerPanNumber" #proposerPanNumber="ngModel" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.panNumber"
+														name="proposerPanNumber" required pattern="[A-Za-z]{5}\d{4}[A-Za-z]{1}" maxlength="10" uppercase (blur)="setGSTINNumber(proposerPanNumber.value)"
+														[class.is-invalid]="proposerPanNumber.invalid && proposerPanNumber.touched"/>
+													
+													<div class="invalid-feedback" *ngIf="proposerPanNumber.errors?.required && proposerPanNumber.touched">Please Enter PAN</div>
+													<div class="invalid-feedback" *ngIf="proposerPanNumber.errors?.pattern && proposerPanNumber.touched">Please Enter the Valid PAN</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Electronic Insurance Account Number</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': eiaNumber.valid}">{{policyDetailsModel.policyDetails.proposerDetails.electronicInsuranceAccountNumber}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" id="eiaNumber" #eiaNumber="ngModel" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.electronicInsuranceAccountNumber"
+														name="eiaNumber" pattern="[A-Za-z0-9]*" uppercase/>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Insurance Repository Name </p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': insuranceRepositoryName.valid}">{{policyDetailsModel.policyDetails.proposerDetails.insuranceRepositoryName}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<p-autoComplete [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.insuranceRepositoryName" #insuranceRepositoryName="ngModel"
+														name="insuranceRepositoryName" [suggestions]="filterIRL" (completeMethod)="filterRepositoryName($event.query)"
+														[forceSelection]="true" inputStyleClass="tabIndexCustom"></p-autoComplete>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>GSTIN(Customer’s) </p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': customerGstNumber.valid}">{{policyDetailsModel.policyDetails.proposerDetails.customerGstNumber}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<input type="text" id="customerGstNumber" #customerGstNumber="ngModel" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.customerGstNumber"
+														name="customerGstNumber" pattern="^([0-9]){2}([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}([a-zA-Z0-9]){1}([zZ])([a-zA-Z0-9]){1}?$"
+														uppercase [class.is-invalid]="customerGstNumber.invalid && customerGstNumber.touched" (change)="setPANNumber(customerGstNumber.value)"/>
+
+													<div class="invalid-feedback" *ngIf="customerGstNumber.errors?.pattern && customerGstNumber.touched">Please enter the Valid GSTIN</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Height(cms)
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': height.valid}">{{policyDetailsModel.policyDetails.riskDetails[0].healthInsured.height}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder" style="display: none;">
+												<div class="form-group">
+													<input type="text" id="height_healthInd" [(ngModel)]="policyDetailsModel.policyDetails.riskDetails[0].healthInsured.height"
+														name="height_healthInd" class="form-control tabIndexCustom" #height="ngModel" (change)="ShowBMI(0)" pattern="[0-9]*" maxlength="3"
+														required/>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Weight(kg)
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': weight.valid}">{{policyDetailsModel.policyDetails.riskDetails[0].healthInsured.weight}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder" style="display: none;">
+												<div class="form-group">
+													<input type="text" id="weight" [(ngModel)]="policyDetailsModel.policyDetails.riskDetails[0].healthInsured.weight" name="weight"
+														class="form-control tabIndexCustom" #weight="ngModel" (change)="ShowBMI(0)" pattern="[0-9]*" maxlength="3" required/>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>BMI
+															<span class="alert-danger-custom">*</span>
+														</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': bmi.valid}">{{policyDetailsModel.policyDetails.riskDetails[0].healthInsured.bmi}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder" style="display: none;">
+												<div class="form-group">
+													<input type="text" id="bmi" [(ngModel)]="policyDetailsModel.policyDetails.riskDetails[0].healthInsured.bmi" name="bmi" class="form-control tabIndexCustom"
+														#bmi="ngModel" readonly required/>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>PED/disability</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': pedLoadingApplicable.valid}">{{policyDetailsModel.policyDetails.riskDetails[0].healthInsured.hasPreExistingAilments}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+
+													<!-- <select id="pedLoadingApplicable" name="pedLoadingApplicable" class="form-control" [(ngModel)]="policyDetailsModel.policyDetails.riskDetails[0].healthInsured.hasPreExistingAilments"
+														#pedLoadingApplicable="ngModel">
+														<option value="">Select</option>
+														<option value="Yes">Yes</option>
+														<option value="No">No</option>
+													</select> -->
+
+													<div class="btn-group btn-group-toggle" id="pedLoadingApplicable">
+														<label class="btn btn-toggle" [class.active]="pedLoadingApplicable.value == 'Yes'">
+															<input type="radio" class="tabIndexCustom" name="pedLoadingApplicable" #pedLoadingApplicable="ngModel" value="Yes" [(ngModel)]="policyDetailsModel.policyDetails.riskDetails[0].healthInsured.hasPreExistingAilments"> Yes
+														</label>
+														<label class="btn btn-toggle" [class.active]="pedLoadingApplicable.value == 'No'">
+															<input type="radio" class="tabIndexCustom" name="pedLoadingApplicable" #pedLoadingApplicable="ngModel" value="No" [(ngModel)]="policyDetailsModel.policyDetails.riskDetails[0].healthInsured.hasPreExistingAilments"> No
+														</label>
+													</div>
+
+												</div>
+											</div>
+										</li>
+										<!-- <li *ngIf="pedLoadingApplicable.value == 'Yes'">
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Pre Existing Ailments <span class="alert-danger-custom">*</span></p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': pedLoadingApplicable.valid}">{{policyDetailsModel.policyDetails.riskDetails[0].healthInsured.preExistingAilments}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder d-block">
+												<div class="form-group">
+													<select id="preExistingAilments" multiple class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.riskDetails[0].healthInsured.preExistingAilments"
+														name="preExistingAilments" #preExistingAilments="ngModel" required style="height: 80% !important;">
+														<option value="">Select</option>
+														<option  *ngFor="let item of preailments" [value]="item.key">{{item.value}}</option>
+													</select>
+													<div *ngIf="preExistingAilments.errors && showValidationMsgs">
+														<div [hidden]="!preExistingAilments.errors.required" class="alert alert-danger-custom" style="font-size:80%;font-weight:400;padding:0 0 0 0;">Required Field</div>
+													</div>
+												</div>
+											</div>
+										</li> -->
+										<li>
+											<div class="formheader">
+												<div class="row">
+													<div class="col-sm-4">
+														<p>Is Applicant Politically Exposed</p>
+													</div>
+													<div class="col-sm-8">
+														<p class="validdata" [ngClass]="{'validdatasuccess': proposerPoliticallyExposed.valid}">{{policyDetailsModel.policyDetails.proposerDetails.proposerPoliticallyExposed ? 'Yes': 'No'}}</p>
+													</div>
+												</div>
+											</div>
+											<div class="formfieldHolder">
+												<div class="form-group">
+													<!-- <label class="custom-control custom-radio">
+														<input #proposerPoliticallyExposed="ngModel" id="proposerPoliticallyExposed" type="radio" class="custom-control-input" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.proposerPoliticallyExposed"
+															name="proposerPoliticallyExposed" [value]="true" (change)="callBackToSetPoliticallyExposed(true);" required>
+														<span class="custom-control-indicator"></span>
+														<span>Yes</span>
+													</label>
+													<label class="custom-control custom-radio">
+														<input #proposerPoliticallyExposed="ngModel" id="proposerPoliticallyExposed" type="radio" class="custom-control-input" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.proposerPoliticallyExposed"
+															name="proposerPoliticallyExposed" [value]="false" (change)="callBackToSetPoliticallyExposed(false);" required>
+														<span class="custom-control-indicator"></span>
+														<span>No</span>
+													</label> -->
+
+													<div class="btn-group btn-group-toggle" id="proposerPoliticallyExposed">
+														<label class="btn btn-toggle" [class.active]="proposerPoliticallyExposed.value == true">
+															<input type="radio" class="tabIndexCustom" name="proposerPoliticallyExposed" #proposerPoliticallyExposed="ngModel" [value]="true" (change)="callBackToSetPoliticallyExposed(true);" required [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.proposerPoliticallyExposed"> Yes
+														</label>
+														<label class="btn btn-toggle" [class.active]="proposerPoliticallyExposed.value == false">
+															<input type="radio" class="tabIndexCustom" name="proposerPoliticallyExposed" #proposerPoliticallyExposed="ngModel" [value]="false" (change)="callBackToSetPoliticallyExposed(false);" required [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.proposerPoliticallyExposed"> No
+														</label>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="aapanDeclaration" style="display:none">
+											<div class="aadharPan_declaration">
+												<div class="formgroup-section form-group">
+													<p>As per IRDA regulation Aadhar and PAN card details are mandatory, in case if you do not have the same at the
+														moment, please declare the below statement.</p>
+													<p class="checkbox-holder">
+														<input type="checkbox" id="panDeclaration" class="custom-checkbox-pay" name="panDeclaration">
+														<label for="panDeclaration"></label>
+														<input type="hidden" name="updatePanAaadharLater" id="updatePanAaadharLater" value="No">I hereby declare that I will update these details within 7 days.</p>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="formbuttonholder">
+												<a href="javascript:void(0)" class="btn btn-link" (click)="backToAddressDetails()" title="Back" data-formprev="proposalform-container"
+												data-position="0">BACK</a>
+
+												<span>
+													<input type="button" (click)="fillNomineeDetails(additionaldetailsform, additionaldetailsform.valid,'additionalform-single')" class="btn btn-primary"
+														data-accnext="2" value="NEXT" title="NEXT" [disabled]="dedupeCheckProp">
+													<span class="subarrow"></span>
+												</span>
+											</div>
+										</li>
+
+									</ul>
+								</form>
+							</div>
+							<!-- AdditionalDetails End -->
+
+							<div class="insuredform-container formmaincontainer" [hidden]="!(currentVIew == 'Nominee1Details')">
+								<form id="nominee1detailsform" #nominee1detailsform="ngForm" name="nominee1detailsform" novalidate="novalidate">
+									<span class="insuredform-single accordian insure_clone panel-group" id="insuredform-single">
+										<div class="viewsummary1 bgSk panel panel-default" id="insure_clone1">
+
+											<div id="proposerDetailsAcc1" class="panel-collapse">
+												<div class="panel-body">
+													<ul class="accordian1" id="nominee1AddressDetails">
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Name <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-4">
+																		<!--<p class="validdata">DCB Bank Ltd</p>-->
+																		<select required class="form-control tabIndexCustom" id="nominee1bankname" name="nominee1bankname" [(ngModel)]="nominee1Details.nominee1bankname" #nominee1bankname="ngModel"
+																		[class.is-invalid]="nominee1bankname.errors?.required && nominee1bankname.touched">
+																			<option value="DCB Bank Ltd">DCB Bank Ltd</option>
+																		  </select>
+
+																		  <div class="invalid-feedback">Please Select</div>
+																	</div>
+																	
+																</div>
+																
+															</div>
+															<!--	<div class="formfieldHolder">
+															 <div class="form-group">
+																																				<input type="text" id="nomineeName" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeName"
+																																				 name="nomineeName" #nomineeName="ngModel" pattern="[a-zA-Z. ]*$" maxlength="40" [required]="setNomineeMandatory"
+																																				 [disabled]="updateRenewalPolicy" />
+																																			</div>
+																																			<div class="col-12 p-0" *ngIf="nomineeName.errors && showValidationMsgs">
+																																				<div [hidden]="!nomineeName.errors.required" class="input-error" >
+																																					Required Field
+																																				</div>
+																																			</div> 
+
+															</div>-->
+														</li>
+
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Relationship with Applicant <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-4">
+																		<!--<p class="validdata">DCB Bank Ltd</p>-->
+																		<select required class="form-control tabIndexCustom" id="nominee1lendingname" name="nominee1lendingname" [(ngModel)]="nominee1Details.nominee1lendingname" #nominee1lendingname="ngModel"
+																		[class.is-invalid]="nominee1lendingname.errors?.required && nominee1lendingname.touched">
+																			<option value="Lending Financial Institution">Lending Financial Institution</option>
+																		</select>
+																		<div class="invalid-feedback">Please Select</div>
+																	</div>
+																</div>
+															</div>
+															<!-- <div class="formfieldHolder">
+																										<div class="form-group">
+																		
+																											<select id="nomineeRelationShip" name="nomineeRelationShip" class="form-control" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeRelationShip"
+																											 #nomineeRelationShip="ngModel"> 
+																																											<option value="">Select</option>
+																																											<option  *ngFor="let item of nomineeRelationship" [value]="item">{{item}}</option>
+																																											</select>
+																		
+																										</div>
+																									</div> -->
+														</li>
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Share of Benefit <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-4">
+																		<!--<p class="validdata">Total outstanding on the date of claim</p>-->
+																		<select required class="form-control tabIndexCustom" id="nominee1sharebenefit" name="nominee1sharebenefit" [(ngModel)]="nominee1Details.nominee1sharebenefit" #nominee1sharebenefit="ngModel"
+																		[class.is-invalid]="nominee1sharebenefit.errors?.required && nominee1sharebenefit.touched">
+																			<option value="Total outstanding on the date of claim">Total outstanding on the date of claim</option>
+																			
+																		  </select>
+																		<div class="invalid-feedback">Please Select</div>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+
+															</div>
+														</li>
+
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Contact Number  <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-4">
+																		<!--<p class="validdata">+91 22 6618 7000</p>-->
+																		<select required class="form-control tabIndexCustom" id="nominee1contactno" name="nominee1contactno" [(ngModel)]="nominee1Details.nominee1contactno" #nominee1contactno="ngModel"
+																		[class.is-invalid]="nominee1contactno.errors?.required && nominee1contactno.touched">
+																			<option value="+91 22 6618 7000">+91 22 6618 7000</option>
+																		  </select>
+																		<div class="invalid-feedback">Please Select</div>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+
+															</div>
+														</li>
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Address1  <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-4">
+																		<!--<p class="validdata">DCB Bank Limited</p>-->
+																		<select required class="form-control tabIndexCustom" id="nominee1address1" name="nominee1address1" [(ngModel)]="nominee1Details.nominee1address1" #nominee1address1="ngModel"
+																		[class.is-invalid]="nominee1address1.errors?.required && nominee1address1.touched">
+																			<option value="DCB Bank Limited">DCB Bank Limited</option>
+																			
+																		  </select>
+
+																		  <div class="invalid-feedback">Please Select</div>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Address2  <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-4">
+																		<!--<p class="validdata">Corporate Office</p>-->
+																		<select required class="form-control tabIndexCustom" id="nominee1address2" name="nominee1address2" [(ngModel)]="nominee1Details.nominee1address2" #nominee1address2="ngModel"
+																		[class.is-invalid]="nominee1address2.errors?.required && nominee1address2.touched">
+																			<option value="Corporate Office">Corporate Office</option>
+																			
+																		  </select>
+
+																		  <div class="invalid-feedback">Please Select</div>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Address3  <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-4">
+																		<!--<p class="validdata">6th Floor, Tower A Peninsula Business Park Senapati Bapat Marg Lower Parel
+																		</p>-->
+																		<select required class="form-control tabIndexCustom" id="nominee1address3" name="nominee1address3" [(ngModel)]="nominee1Details.nominee1address3" #nominee1address3="ngModel"
+																		[class.is-invalid]="nominee1address3.errors?.required && nominee1address3.touched">
+																			<option value="6th Floor, Tower A Peninsula Business Park Senapati Bapat Marg Lower Parel">6th Floor, Tower A Peninsula Business Park Senapati Bapat Marg Lower Parel</option>
+																			
+																		  </select>
+
+																		  <div class="invalid-feedback">Please Select</div>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+
+															</div>
+														</li>
+
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>City  <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-4">
+																	<!--	<p class="validdata">Mumbai</p>-->
+																		<select required class="form-control tabIndexCustom" id="nominee1city" name="nominee1city" [(ngModel)]="nominee1Details.nominee1city" #nominee1city="ngModel"
+																		[class.is-invalid]="nominee1city.errors?.required && nominee1city.touched">
+																			<option value="Mumbai">Mumbai</option>
+																			
+																		  </select>
+
+																		  <div class="invalid-feedback">Please Select</div>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+
+															</div>
+														</li>
+
+
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Pincode  <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-4">
+																		<!--<p class="validdata">400013</p>-->
+																		<select required class="form-control tabIndexCustom" id="nominee1pincode" name="nominee1pincode" [(ngModel)]="nominee1Details.nominee1pincode" #nominee1pincode="ngModel"
+																		[class.is-invalid]="nominee1pincode.errors?.required && nominee1pincode.touched">
+																			<option value="400013">400013</option>
+																			
+																		  </select>
+
+																		  <div class="invalid-feedback">Please Select</div>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+
+															</div>
+														</li>
+														<!-- <li class="addprevinsurmain">
+
+														</li> -->
+
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="formbuttonholder insuredbuttonholder">
+											<a href="javascript:void(0)" (click)="backToAdditionalDetails()" class="btn btn-link" title="ADDERSS DETAILS" data-formprev="contactform-container"
+											 data-position="0">BACK</a>
+
+
+											<span>
+												<input type="button" (click)="nextToNominee2Details(nominee1detailsform,nominee1detailsform.valid,'nominee1AddressDetails')"
+												 class="btn btn-primary" data-accnext="2" value="NEXT" title="NEXT">
+												<span class="subarrow"></span>
+											</span>
+										</div>
+									</span>
+								</form>
+							</div>
+
+							<div class="insuredform-container formmaincontainer" [hidden]="!(currentVIew == 'Nominee2Details')">
+								<form id="nominee2detailsform" #nominee2detailsform="ngForm" name="nominee2detailsform" novalidate="novalidate">
+									<span class="insuredform-single accordian insure_clone panel-group" id="insuredform-single">
+										<div class="viewsummary1 bgSk panel panel-default" id="insure_clone1">
+
+											<div id="proposerDetailsAcc1" class="panel-collapse">
+												<div class="panel-body">
+													<ul class="accordian1" id="nominee2Details">
+
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>First Name
+																			<span class="alert-danger-custom">*</span>
+																		</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="nomineeName.valid">{{policyDetailsModel.policyDetails.proposerDetails.nomineeName}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder first-child">
+																<div class="form-group">
+																	<input type="text" id="nomineeName" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeName"
+																	 name="nomineeName" #nomineeName="ngModel" pattern="[a-zA-Z. ]*$" maxlength="40" required [disabled]="updateRenewalPolicy"
+																	/>
+																</div>
+																<div class="col-12 p-0" *ngIf="nomineeName.errors && showValidationMsgs">
+																	<div [hidden]="!nomineeName.errors.required" class="input-error" >
+																		Required Field
+																	</div>
+																</div>
+
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Middle Name</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata">{{policyDetailsModel.policyDetails.proposerDetails.nomineeMiddleName}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" id="nomineemiddleName" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeMiddleName"
+																	 name="nomineemiddleName" #nomineemiddleName="ngModel" maxlength="40" pattern="[a-zA-Z. ]*$" />
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Last Name
+																			<span class="alert-danger-custom">*</span>
+																		</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="nomineeLastName.valid">{{policyDetailsModel.policyDetails.proposerDetails.nomineeLastName}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" id="nomineeLastName" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeLastName"
+																	 name="nomineeLastName" #nomineeLastName="ngModel" required maxlength="40" pattern="[a-zA-Z. ]*$" [required]="setNomineeMandatory"
+																	 [disabled]="updateRenewalPolicy" />
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Gender</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="nomineeGender.valid">{{policyDetailsModel.policyDetails.proposerDetails.nomineeGender}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<!-- <div class="form-group">
+																	<label class="custom-control custom-radio" id="nomineeGnderforedit">
+																		<input id="nomineeGender" type="radio" class="custom-control-input" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeGender"
+																		 name="nomineeGender" #nomineeGender="ngModel" value="Male">
+																		<span class="custom-control-indicator"></span>
+																		<span>Male</span>
+																	</label>
+																	<label class="custom-control custom-radio">
+																		<input id="nomineeGender2" type="radio" class="custom-control-input" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeGender"
+																		 name="nomineeGender" #nomineeGender="ngModel" value="Female">
+																		<span class="custom-control-indicator"></span>
+																		<span>Female</span>
+																	</label>
+																</div> -->
+																<div class="btn-group btn-group-toggle" id="nomineeGnderforedit">
+																	<label class="btn btn-toggle" [class.active]="nomineeGender.value == 'Male'">
+																		<input id="nomineeGender" class="tabIndexCustom" type="radio" required name="nomineeGender" #nomineeGender="ngModel" value="Male" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeGender"> Male
+																	</label>
+																	<label class="btn btn-toggle" [class.active]="nomineeGender.value == 'Female'">
+																		<input id="nomineeGender2" class="tabIndexCustom" type="radio" required name="nomineeGender" #nomineeGender="ngModel" value="Female" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeGender"> Female
+																	</label>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Relationship with Applicant
+																			<span class="alert-danger-custom">*</span>
+																		</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="nomineeRelationShip.valid">{{policyDetailsModel.policyDetails.proposerDetails.nomineeRelationShip}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+
+																	<select id="nomineeRelationShip" required name="nomineeRelationShip" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeRelationShip"
+																	 #nomineeRelationShip="ngModel">
+																		<option value="">Select</option>
+																		<option *ngFor="let item of nomineeRelationship" [value]="item">{{item}}</option>
+																	</select>
+
+																</div>
+															</div>
+														</li>
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Date of Birth <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="nomineeDob.valid">{{policyDetailsModel.policyDetails.proposerDetails.nomineeDob}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div>
+																	<div style="max-width: 240px;" class="form-group">
+																		<p-calendar id="nomineeDob" name="nomineeDob" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeDob" [monthNavigator]="true"
+																		 [yearNavigator]="true" yearRange="1919:2020" dateFormat="dd/mm/yy" showIcon="true" dataType="string" [maxDate]="maxDate"
+																		 #nomineeDob="ngModel" (change)="validateNominee2Age();" (onSelect)="validateNominee2Age();" required="true" inputStyleClass="tabIndexCustom"></p-calendar>
+
+																		<div class="invalid-feedback"  [class.d-block]="nomineeDob.errors?.required && nomineeDob.touched">Please Enter Date of Birth</div>
+																	</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Mobile</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="nomineeMobileNumber.valid">{{policyDetailsModel.policyDetails.proposerDetails.nomineeMobileNumber}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" id="nomineeMobileNumber" #nomineeMobileNumber="ngModel" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeMobileNumber"
+																		name="nomineeMobileNumber" maxlength="10" pattern="[0-9]{10}">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Share of Benefit <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="shareofBenefit.valid">{{policyDetailsModel.policyDetails.proposerDetails.shareofBenefit}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<select id="shareofBenefit" name="shareofBenefit" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.shareofBenefit"
+																		#shareofBenefit="ngModel" required [class.is-invalid]="shareofBenefit.errors?.required && shareofBenefit.touched">
+																		<option value="Balance of Sum Insured (if any) after settling Total Outstanding">Balance of Sum Insured (if any) after settling Total Outstanding</option>
+																	</select>
+																	<div class="invalid-feedback">Please Select Share of Benefit</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formfieldHolder d-block">
+																<div class="form-group form-check">
+																	<input type="checkbox" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.isProposerNomineeAsProposer" class="form-check-input tabIndexCustom" name="isProposerNomineeAsProposer"
+																		#isProposerNomineeAsProposer="ngModel" (change)="isAddressSame($event)" [checked]="policyDetailsModel.policyDetails.proposerDetails.isProposerNomineeAsProposer" id="isProposerNomineeAsProposer" style="opacity: 1; top: 3px;">
+																	<label for="isProposerNomineeAsProposer">Is Address is Same as Proposer Address</label>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Address1
+																			<span class="alert-danger-custom">*</span>
+																		</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [ngClass]="{'validdatasuccess': nominee2InfoAddress1.valid}">{{policyDetailsModel.policyDetails.proposerDetails.nomineeAddress1}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeAddress1" class="form-control tabIndexCustom"
+																	 #nominee2InfoAddress1="ngModel" name="nominee2InfoAddress1" id="nominee2address1" maxlength="40" required>
+																</div>
+																<div *ngIf="nominee2InfoAddress1.errors && nominee2InfoAddress1.touched">
+																	<div [hidden]="!nominee2InfoAddress1.errors.required" class="input-error" >
+																		Please enter the House No. and Name
+																	</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Address2</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [ngClass]="{'validdatasuccess': nominee2InfoAddress2.valid}">{{policyDetailsModel.policyDetails.proposerDetails.nomineeAddress2}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeAddress2" class="form-control tabIndexCustom"
+																	 name="nominee2InfoAddress2" #nominee2InfoAddress2="ngModel" id="nominee2address2" maxlength="40"> </div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Address3</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [ngClass]="{'validdatasuccess': nominee2InfoAddress3.valid}">{{policyDetailsModel.policyDetails.proposerDetails.nomineeAddress3}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeAddress3" class="form-control tabIndexCustom"
+																	 name="nominee2InfoAddress3" #nominee2InfoAddress3="ngModel" id="nominee2address3" maxlength="40"> </div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Address4</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [ngClass]="{'validdatasuccess': nominee2InfoAddress4.valid}">{{policyDetailsModel.policyDetails.proposerDetails.nomineeAddress4}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeAddress4" class="form-control tabIndexCustom"
+																	 name="nominee2InfoAddress4" #nominee2InfoAddress4="ngModel" id="nominee2address4" maxlength="40"> </div>
+															</div>
+														</li>
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>City
+																			<span class="alert-danger-custom">*</span>
+																		</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [ngClass]="{'validdatasuccess': nominee2tempCity.valid}">{{policyDetailsModel.policyDetails.proposerDetails.nomineeCity}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div>
+																	<p-autoComplete id="nominee2City" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeCity" #nominee2tempCity="ngModel"
+																	 name="nominee2tempCity" [suggestions]="filteredNomineeCities" (completeMethod)="filterNomineeCities($event.query)"
+																	 required="true" (onSelect)="callBackToGetStatesofNominee($event);" [forceSelection]="true" inputStyleClass="tabIndexCustom"></p-autoComplete>
+
+																</div>
+															</div>
+														</li>
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>State</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [ngClass]="{'validdatasuccess': nominee2state.valid}">{{policyDetailsModel.policyDetails.proposerDetails.nomineeState}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" id="nominee2state" #nominee2state="ngModel" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineeState"
+																	 name="nominee2state" class="form-control tabIndexCustom" readonly="readonly" />
+																</div>
+																<div *ngIf="nominee2state.errors && nominee2state.touched">
+																	<div [hidden]="!nominee2state.errors.required" class="input-error" >
+																		Please enter the State
+																	</div>
+																</div>
+															</div>
+														</li>
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Pincode
+																			<span class="alert-danger-custom">*</span>
+																		</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [ngClass]="{'validdatasuccess': nominee2pinCode.valid}">{{policyDetailsModel.policyDetails.proposerDetails.nomineePincode}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" id="nominee2pinCode" #nominee2pinCode="ngModel" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.nomineePincode"
+																	 name="nominee2pinCode" required pattern="^[1-9][0-9]{5}$" maxlength="6" />
+																</div>
+																<div *ngIf="nominee2pinCode.errors && nominee2pinCode.touched">
+																	<div [hidden]="!nominee2pinCode.errors.required" class="input-error" >
+																		Please enter the Pincode
+																	</div>
+																</div>
+															</div>
+														</li>
+														<li class="addprevinsurmain">
+
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="formbuttonholder insuredbuttonholder">
+											<a href="javascript:void(0)" (click)="backToNominee1Details()" class="btn btn-link" title="Back" data-formprev="contactform-container"
+											 data-position="0">BACK</a>
+
+											<span *ngIf="setGuardianMandatory">
+												<!-- <input type="button" (click)="nextToGuardianDetails(guardiandetailsform,guardiandetailsform.valid,'guardianDetails')" class="btn btn-primary"
+												 data-accnext="2" value="NEXT" title="NEXT"> -->
+												<input type="button" (click)="nextToGuardianDetails(nominee2detailsform,nominee2detailsform.valid,'nominee2Details')" class="btn btn-primary"
+												 data-accnext="2" value="NEXT" title="NEXT">
+												<span class="subarrow"></span>
+											</span>
+											<span *ngIf="!setGuardianMandatory">
+												<input type="button" (click)="GoToHomeDetails(nominee2detailsform,nominee2detailsform.valid,'nominee2Details')" class="btn btn-primary"
+												 data-accnext="2" value="NEXT" title="NEXT">
+												<span class="subarrow"></span>
+											</span>
+										</div>
+									</span>
+								</form>
+							</div>
+
+							<div class="insuredform-container formmaincontainer" *ngIf="setGuardianMandatory" [hidden]="!(currentVIew == 'GuardianDetails')">
+								<form id="guardiandetailsform" #guardiandetailsform="ngForm" name="guardiandetailsform" novalidate="novalidate">
+									<span class="insuredform-single accordian insure_clone panel-group" id="insuredform-single">
+										<div class="viewsummary1 bgSk panel panel-default" id="insure_clone1">
+
+											<div id="proposerDetailsAcc1" class="panel-collapse">
+												<div class="panel-body">
+													<ul class="accordian1" id="guardianDetails">
+														<!-- <li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-12 d-flex justify-content-center" style="font-weight:bold">
+																		<p>
+																			<strong>Guardian Details</strong>
+																		</p>
+																	</div>
+
+																</div>
+															</div>
+
+														</li> -->
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>First Name <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="guardianFirstName.valid">{{policyDetailsModel.policyDetails.proposerDetails.guardianFirstName}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder first-child">
+																<div class="form-group">
+																	<input type="text" id="guardianFirstName" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.guardianFirstName"
+																	 name="guardianFirstName" #guardianFirstName="ngModel" pattern="[a-zA-Z. ]*$" maxlength="40" required
+																	 [disabled]="updateRenewalPolicy" [class.is-invalid]="guardianFirstName.errors?.required && guardianFirstName.touched"/>
+
+																	<div class="invalid-feedback">Please Enter First Name</div>
+																</div>
+																<!-- <div class="col-12 p-0" *ngIf="guardianFirstName.errors && showValidationMsgs">
+																	<div [hidden]="!guardianFirstName.errors.required" class="input-error" >
+																		Required Field
+																	</div>
+																</div> -->
+
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Middle Name</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="guardianMiddleName.valid">{{policyDetailsModel.policyDetails.proposerDetails.guardianMiddleName}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" id="guardianMiddleName" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.guardianMiddleName"
+																	 name="guardianMiddleName" #guardianMiddleName="ngModel" maxlength="40" pattern="[a-zA-Z. ]*$" />
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Last Name <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="guardianLastName.valid">{{policyDetailsModel.policyDetails.proposerDetails.guardianLastName}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<input type="text" id="guardianLastName" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.guardianLastName"
+																	 name="guardianLastName" #guardianLastName="ngModel" required maxlength="40" pattern="[a-zA-Z. ]*$" [class.is-invalid]="guardianLastName.errors?.required && guardianLastName.touched"/>
+
+																	<div class="invalid-feedback">Please Enter Last Name</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Gender</p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="guardianGender.valid">{{policyDetailsModel.policyDetails.proposerDetails.guardianGender}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<!-- <label class="custom-control custom-radio" id="nomineeGnderforedit">
+																		<input id="guardianGender" type="radio" class="custom-control-input" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.guardianGender"
+																		 name="guardianGender" #guardianGender="ngModel" value="Male">
+																		<span class="custom-control-indicator"></span>
+																		<span>Male</span>
+																	</label>
+																	<label class="custom-control custom-radio">
+																		<input id="guardianGender" type="radio" class="custom-control-input" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.guardianGender"
+																		 name="guardianGender" #guardianGender="ngModel" value="Female">
+																		<span class="custom-control-indicator"></span>
+																		<span>Female</span>
+																	</label> -->
+
+																	<div class="btn-group btn-group-toggle" id="GuardianGnderforedit">
+																		<label class="btn btn-toggle" [class.active]="guardianGender.value == 'Male'">
+																			<input id="guardianGender" type="radio" class="tabIndexCustom" name="guardianGender" #guardianGender="ngModel" value="Male" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.guardianGender"> Male
+																		</label>
+																		<label class="btn btn-toggle" [class.active]="guardianGender.value == 'Female'">
+																			<input id="guardianGender2" type="radio" class="tabIndexCustom" name="guardianGender" #guardianGender="ngModel" value="Female" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.guardianGender"> Female
+																		</label>
+																	</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Relationship with Applicant <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="guardianRelationShip.valid">{{policyDetailsModel.policyDetails.proposerDetails.guardianRelationShip}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div class="form-group">
+																	<select id="guardianRelationShip" name="guardianRelationShip" class="form-control tabIndexCustom" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.guardianRelationShip"
+																	 #guardianRelationShip="ngModel" required [class.is-invalid]="guardianRelationShip.errors?.required && guardianRelationShip.touched">
+																		<option value="">Select</option>
+																		<option *ngFor="let item of nomineeRelationship" [value]="item">{{item}}</option>
+																	</select>
+																	<div class="invalid-feedback">Please Select Relationship</div>
+																</div>
+															</div>
+														</li>
+
+														<li>
+															<div class="formheader">
+																<div class="row">
+																	<div class="col-sm-4">
+																		<p>Date of Birth <span class="alert-danger-custom">*</span></p>
+																	</div>
+																	<div class="col-sm-8">
+																		<p class="validdata" [class.validdatasuccess]="guardianDob.valid">{{policyDetailsModel.policyDetails.proposerDetails.guardianDob}}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="formfieldHolder">
+																<div>
+																	<div style="max-width: 240px;" class="form-group">
+																		<p-calendar id="guardianDob" name="guardianDob" [(ngModel)]="policyDetailsModel.policyDetails.proposerDetails.guardianDob"
+																		 [monthNavigator]="true" [yearNavigator]="true" yearRange="1919:2020" dateFormat="dd/mm/yy" showIcon="true"
+																		 dataType="string" [maxDate]="maxDate" #guardianDob="ngModel" (change)="validateGuardianDOB(guardianDob.value);"
+																		 (onSelect)="validateGuardianDOB(guardianDob.value);" required="true" inputStyleClass="tabIndexCustom"></p-calendar>
+
+																		 <div class="invalid-feedback"  [class.d-block]="guardianDob.errors?.required && guardianDob.touched">Please Enter Date of Birth</div>
+																	</div>
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="formbuttonholder insuredbuttonholder">
+											<a href="javascript:void(0)" (click)="backToNominee2Details()" class="btn btn-link" title="ADDERSS DETAILS" data-formprev="contactform-container"
+											 data-position="0">BACK</a>
+
+
+
+
+											<span>
+												<input type="button" (click)="GoToHomeDetails(guardiandetailsform,guardiandetailsform.valid,'guardianDetails')" class="btn btn-primary"
+												 data-accnext="2" value="NEXT" title="NEXT">
+												<span class="subarrow"></span>
+											</span>
+										</div>
+									</span>
+								</form>
+							</div>
+
+						</div>
+						<!-- END COL-MD-9 -->
+
+						<!-- COl-md-3-->
+
+						<!-- <div id="sidePanel" class="col-md-3" *ngIf="currentVIew != 'ProposerDetails'"> -->
+						<div id="sidePanel" class="col-md-3">
+							<div class="proposalright-main">
+								<div class="calculatepremium-rightdata">
+									<p class="formheadings text-center" id="edittext" style="font-size: 17.5px;">Click on "Edit" to update details.</p>
+									<div class="panel-group viewsummary" id="viewSummary">
+										<div class="panel panel-default" style="display: block;">
+											<h4 class="panel-title">
+												<a data-toggle="collapse" data-parent="#viewSummary" href="#proposerDetailsAcc" class="panel-heading collapsed" title="Applicant Details"
+												 aria-expanded="false"> Applicant Details
+													<span class="editsum" title="Edit">Edit</span>
+												</a>
+											</h4>
+											<div id="proposerDetailsAcc" class="panel-collapse collapse in" aria-expanded="true">
+												<div class="panel-body">
+													<ul data-formcontainer="proposalform-container" class="viewsummarylist jspScrollable" style="overflow: hidden; padding: 0px; width: 233px;outline-color: white;"
+													 tabindex="0">
+														<div class="jspContainer" style="width: 233px;">
+															<div>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.firstName">
+																	<div class="row CustomEdit" id="firstName_Summary">
+																		<div class="col-md-7" style="font-weight: bold;">
+																			<p>First Name</p>
+																		</div>
+																		<div class="col-md-5">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.firstName}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.middleName">
+																	<div class="row CustomEdit" id="middleName_Summary">
+																		<div class="col-md-7" style="font-weight: bold;">
+																			<p>Middle Name</p>
+																		</div>
+																		<div class="col-md-5">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.middleName}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.lastName">
+																	<div class="row CustomEdit" id="lastName_Summary">
+																		<div class="col-md-7" style="font-weight: bold;">
+																			<p>Last Name</p>
+																		</div>
+																		<div class="col-md-5">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.lastName}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.dateOfBirth">
+																	<div class="row CustomEdit" id="dateOfBirth_Summary">
+																		<div class="col-md-7" style="font-weight: bold;">
+																			<p>Date of Birth</p>
+																		</div>
+																		<div class="col-md-5">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.dateOfBirth}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.gender">
+																	<div class="row CustomEdit" id="genderradio_Summary">
+																		<div class="col-md-7" style="font-weight: bold;">
+																			<p>Gender</p>
+																		</div>
+																		<div class="col-md-5">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.gender}}</p>
+																		</div>
+																	</div>
+																</li>
+
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.customerAadharNumber">
+
+																	<div class="row CustomEdit" id="customerAadharNumber_Summary">
+																		<div class="col-md-7" style="font-weight: bold;">
+																			<p>Aadhar Number</p>
+																		</div>
+																		<div class="col-md-5">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.customerAadharNumber}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.occupation">
+																	<div class="row CustomEdit" id="occupation_Summary">
+																		<div class="col-md-7" style="font-weight: bold;">
+																			<p>Occupation</p>
+																		</div>
+																		<div class="col-md-5">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.occupation}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.proposerPoliticallyExposed">
+																	<div class="row CustomEdit" id="proposerPoliticallyExposed_Summary">
+																		<div class="col-md-7" style="font-weight: bold;">
+																			<p>Is Applicant Politically Exposed</p>
+																		</div>
+																		<div class="col-md-5">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.proposerPoliticallyExposed}}</p>
+																		</div>
+																	</div>
+																</li>
+															</div>
+														</div>
+													</ul>
+												</div>
+											</div>
+
+
+
+										</div>
+
+										<div class="panel panel-default" style="display: block;">
+											<h4 class="panel-title">
+												<a data-toggle="collapse" data-parent="#viewSummary" href="#contactDetailsAcc" class="panel-heading collapsed" title="Contact Details"
+												 aria-expanded="false">Contact Details
+													<span class="editsum" title="Edit">Edit</span>
+												</a>
+											</h4>
+											<div id="contactDetailsAcc" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+												<div class="panel-body">
+													<ul data-formcontainer="contactform-container" class="viewsummarylist" style="overflow: hidden; padding: 0px; width: 233px;outline-color: white;">
+														<div class="jspContainer" style="width: 233px;">
+															<div>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.address1">
+																	<div class="row CustomEdit" id="address1_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>Address1</p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.address1}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.address2">
+																	<div class="row CustomEdit" id="address2_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>Address2</p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.address2}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.address3">
+																	<div class="row CustomEdit" id="address3_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>Address3</p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.address3}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.address4">
+																	<div class="row CustomEdit" id="address4_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>Address4</p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.address4}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.city">
+																	<div class="row CustomEdit" id="City_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>City</p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.city}}</p>
+																		</div>
+																	</div>
+																</li>
+
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.state">
+
+																	<div class="row CustomEdit" id="City_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>State</p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.state}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.pinCode">
+																	<div class="row CustomEdit" id="pinCode_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>PinCode</p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.pinCode}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.mobile">
+																	<div class="row CustomEdit" id="mobile_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>Mobile</p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.mobile}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.email">
+																	<div class="row CustomEdit" id="email_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>Email</p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.email}}</p>
+																		</div>
+																	</div>
+																</li>
+
+															</div>
+														</div>
+													</ul>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="panel panel-default" style="display: block;">
+											<h4 class="panel-title">
+												<a data-toggle="collapse" data-parent="#viewSummary" href="#NomineeDetailsAcc" class="panel-heading collapsed" title="Contact Details"
+												 aria-expanded="false">Nominee Details
+													<span class="editsum" title="Edit">Edit</span>
+												</a>
+											</h4>
+											<div id="NomineeDetailsAcc" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+												<div class="panel-body">
+													<ul data-formcontainer="contactform-container" class="viewsummarylist" style="overflow: hidden; padding: 0px; width: 233px;outline-color: white;">
+														<div class="jspContainer" style="width: 233px;">
+															<div>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.nomineeName">
+																	<div class="row CustomEdit" id="nomineeName_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>NomineeName </p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.nomineeName}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.nomineeMiddleName">
+																	<div class="row CustomEdit" id="nomineemiddleName_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>NomineemiddleName </p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.nomineeMiddleName}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.nomineeLastName">
+																	<div class="row CustomEdit" id="nomineeLastName_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>NomineeLastName </p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.nomineeLastName}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.nomineeGender">
+																	<div class="row CustomEdit" id="nomineeGnderforedit_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>NomineeGender </p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.nomineeGender}}</p>
+																		</div>
+																	</div>
+																</li>
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.nomineeRelationShip">
+																	<div class="row CustomEdit" id="nomineeRelationShip_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>NomineeRelationShip </p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.nomineeRelationShip}}</p>
+																		</div>
+																	</div>
+																</li>
+
+																<li [hidden]="!policyDetailsModel.policyDetails.proposerDetails.nomineeDob">
+
+																	<div class="row CustomEdit" id="nomineeDob_Summary">
+																		<div class="col-md-6" style="font-weight: bold;">
+																			<p>NomineeDob </p>
+																		</div>
+																		<div class="col-md-6">
+																			<p>{{policyDetailsModel.policyDetails.proposerDetails.nomineeDob}}</p>
+																		</div>
+																	</div>
+																</li>
+
+															</div>
+														</div>
+													</ul>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<p-growl [(value)]="msgs"></p-growl>
